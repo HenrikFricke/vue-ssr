@@ -10,7 +10,7 @@ export class ArticleRepository {
 
   async findAll() {
     const { data } = await this._fetch(
-      '/spaces/in5y38gfylmu/environments/master/entries?content_type=article'
+      `/spaces/${this.spaceId}/environments/master/entries?content_type=article`
     )
 
     return data.items.map(this._normalize)
