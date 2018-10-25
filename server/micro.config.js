@@ -1,6 +1,5 @@
 const dispatch = require('micro-route/dispatch')
 const { Nuxt, Builder } = require('nuxt')
-const createApi = require('./api')
 
 // Require nuxt config
 const config = require('../nuxt.config.js')
@@ -12,9 +11,6 @@ if (nuxt.options.dev) {
 }
 
 module.exports = async (req, res) => {
-  const api = createApi()
-
   await dispatch()
-    .dispatch('/api', ['GET'], api)
     .dispatch('*', ['GET'], (req, res) => nuxt.render(req, res))(req, res)
 }
