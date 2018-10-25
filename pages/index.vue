@@ -12,13 +12,9 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 import { createArticleRepository } from '~/factories/createArticleRepository'
 
 export default {
-  components: {
-    Logo
-  },
   async asyncData() {
     const repository = createArticleRepository()
     const articles = await repository.findAll()
