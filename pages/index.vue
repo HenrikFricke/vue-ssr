@@ -16,17 +16,31 @@
 
 <script>
 import Topbar from '~/components/Topbar'
+
 import { createArticleRepository } from '~/factories/createArticleRepository'
+import { createCategoryRepository } from '~/factories/createCategoryRepository'
 
 export default {
   components: {
     Topbar
   },
   async asyncData() {
-    const repository = createArticleRepository()
-    const articles = await repository.findAll()
+    const articleRepository = createArticleRepository()
+    const categoryRepository = createCategoryRepository()
 
-    return { articles, navItems: [{ url: '#', label: 'test' }] }
+    const responses = await Promise.all([
+      articleRepository.findAll(),
+      categoryRepository.findAll()
+    ])
+
+    const articles = responses[0]
+
+    const navItems = responses[1].map(category => ({
+      url: category.slug,
+      label: category.name
+    }))
+
+    return { articles, navItems }
   }
 }
 </script>
