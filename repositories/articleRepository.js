@@ -46,6 +46,6 @@ export class ArticleRepository {
     const assetId = teaserImage.sys.id
     const asset = data.includes.Asset.find(asset => asset.sys.id === assetId)
 
-    return asset.fields.file.url
+    return `${asset.fields.file.url}?w=960&h=960&fm=jpg&fl=progressive`
   }
 }
