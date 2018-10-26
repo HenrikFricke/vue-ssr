@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-grey-lighter text-black font-sans">
+  <nav class="bg-grey-lighter text-black font-sans mb-8">
     <div class="max-w-xl mx-auto p-4 justify-between items-center flex">
       <span class="text-xl">
         Vue SSR

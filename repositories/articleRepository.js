@@ -6,6 +6,9 @@ export class ArticleRepository {
   constructor(spaceId, accessToken) {
     this.spaceId = spaceId
     this.accessToken = accessToken
+
+    this._normalize = this._normalize.bind(this)
+    this._getTeaserImage = this._getTeaserImage.bind(this)
   }
 
   async findAll() {
@@ -13,7 +16,7 @@ export class ArticleRepository {
       `/spaces/${this.spaceId}/environments/master/entries?content_type=article`
     )
 
-    return data.items.map(this._normalize)
+    return data.items.map(article => this._normalize(article, data))
   }
 
   async _fetch(path) {
@@ -24,7 +27,7 @@ export class ArticleRepository {
     })
   }
 
-  _normalize(article) {
+  _normalize(article, data) {
     return {
       id: article.sys.id,
       updateAt: article.sys.updatedAt,
@@ -33,7 +36,16 @@ export class ArticleRepository {
       subheadline: article.fields.subheadline,
       teaser: article.fields.teaser,
       source: article.fields.source,
-      tags: article.fields.tags
+      tags: article.fields.tags,
+      teaserImage: this._getTeaserImage(article, data)
     }
+  }
+
+  _getTeaserImage(article, data) {
+    const teaserImage = article.fields.teaserImage
+    const assetId = teaserImage.sys.id
+    const asset = data.includes.Asset.find(asset => asset.sys.id === assetId)
+
+    return asset.fields.file.url
   }
 }
