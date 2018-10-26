@@ -1,6 +1,5 @@
 <template>
   <div>
-    <topbar :nav-items="navItems" />
     <section class="flex justify-center">
       <ul>
         <li
@@ -15,18 +14,14 @@
 </template>
 
 <script>
-import Topbar from '~/components/Topbar'
 import { createArticleRepository } from '~/factories/createArticleRepository'
 
 export default {
-  components: {
-    Topbar
-  },
   async asyncData() {
-    const repository = createArticleRepository()
-    const articles = await repository.findAll()
+    const articleRepository = createArticleRepository()
+    const articles = await articleRepository.findAll()
 
-    return { articles, navItems: [{ url: '#', label: 'test' }] }
+    return { articles }
   }
 }
 </script>
