@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full lg:flex">
+  <div class="w-full lg:flex mb-8">
     <div
       :style="{ backgroundImage: teaserImageUrl }"
       class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
