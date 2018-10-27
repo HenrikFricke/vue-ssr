@@ -1,12 +1,12 @@
 import { createCategoryRepository } from '~/factories/createCategoryRepository'
 
 export const state = () => ({
-  navItems: []
+  categories: []
 })
 
 export const mutations = {
-  setNavItems(state, navItems) {
-    state.navItems = navItems
+  setCategories(state, categories) {
+    state.categories = categories
   }
 }
 
@@ -15,11 +15,6 @@ export const actions = {
     const categoryRepository = createCategoryRepository()
     const categories = await categoryRepository.findAll()
 
-    const navItems = categories.map(category => ({
-      url: category.slug,
-      label: category.name
-    }))
-
-    await commit('setNavItems', navItems)
+    await commit('setCategories', categories)
   }
 }

@@ -15,6 +15,11 @@ import Card from '~/components/Card'
 import { createArticleRepository } from '~/factories/createArticleRepository'
 
 export default {
+  head() {
+    return {
+      title: 'Vue SSR'
+    }
+  },
   components: {
     Card
   },
