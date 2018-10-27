@@ -18,6 +18,11 @@ import Card from '~/components/Card'
 import { createArticleRepository } from '~/factories/createArticleRepository'
 
 export default {
+  head() {
+    return {
+      title: `${this.category.name} - Vue SSR`
+    }
+  },
   components: {
     Card
   },
