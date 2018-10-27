@@ -14,7 +14,12 @@ export default {
   },
   computed: {
     navItems() {
-      return this.$store.state.navItems
+      const categories = this.$store.state.categories
+
+      return categories.map(category => ({
+        url: category.slug,
+        label: category.name
+      }))
     }
   }
 }

@@ -19,6 +19,16 @@ export class ArticleRepository {
     return data.items.map(article => this._normalize(article, data))
   }
 
+  async findAllByCategory(categoryId) {
+    const { data } = await this._fetch(
+      `/spaces/${
+        this.spaceId
+      }/environments/master/entries?content_type=article&fields.category.sys.id=${categoryId}`
+    )
+
+    return data.items.map(article => this._normalize(article, data))
+  }
+
   async _fetch(path) {
     return axios.get(ArticleRepository.baseURL + path, {
       headers: {
