@@ -4,6 +4,7 @@ module.exports = {
   mode: 'universal',
 
   dev: (process.env.NODE_ENV !== 'production'),
+  cssSourceMap: (process.env.NODE_ENV !== 'production'),
 
   /*
   ** Headers of the page
