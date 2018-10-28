@@ -34,6 +34,16 @@ export class ArticleRepository {
     return data.items.map(article => this._normalize(article, data))
   }
 
+  async findAllRecommendations(articleId, limit) {
+    const { data } = await this._fetch(
+      `/spaces/${
+        this.spaceId
+      }/environments/master/entries?content_type=article&limit=${limit}&sys.id[ne]=${articleId}`
+    )
+
+    return data.items.map(article => this._normalize(article, data))
+  }
+
   async findAllByCategory(categoryId) {
     const { data } = await this._fetch(
       `/spaces/${
