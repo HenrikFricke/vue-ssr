@@ -9,6 +9,21 @@ export class ArticleRepository {
 
     this._normalize = this._normalize.bind(this)
     this._getTeaserImage = this._getTeaserImage.bind(this)
+    this._getCategory = this._getCategory.bind(this)
+  }
+
+  async findBySlug(slug) {
+    const { data } = await this._fetch(
+      `/spaces/${
+        this.spaceId
+      }/environments/master/entries?content_type=article&fields.slug=${slug}`
+    )
+
+    if (data.items.length === 0) {
+      throw new Error('Unknown article')
+    }
+
+    return this._normalize(data.items[0], data)
   }
 
   async findAll() {
@@ -47,7 +62,10 @@ export class ArticleRepository {
       teaser: article.fields.teaser,
       source: article.fields.source,
       tags: article.fields.tags,
-      teaserImage: this._getTeaserImage(article, data)
+      teaserImage: this._getTeaserImage(article, data),
+      slug: article.fields.slug,
+      category: this._getCategory(article, data),
+      content: article.fields.content
     }
   }
 
@@ -57,5 +75,13 @@ export class ArticleRepository {
     const asset = data.includes.Asset.find(asset => asset.sys.id === assetId)
 
     return `${asset.fields.file.url}?w=960&h=960&fm=jpg&fl=progressive`
+  }
+
+  _getCategory(article, data) {
+    const category = article.fields.category
+    const entryId = category.sys.id
+    const entry = data.includes.Entry.find(entry => entry.sys.id === entryId)
+
+    return { slug: entry.fields.slug }
   }
 }

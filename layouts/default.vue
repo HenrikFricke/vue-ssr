@@ -17,7 +17,7 @@ export default {
       const categories = this.$store.state.categories
 
       return categories.map(category => ({
-        url: category.slug,
+        url: `/${category.slug}`,
         label: category.name
       }))
     }
