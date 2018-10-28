@@ -1,5 +1,5 @@
 <template>
-  <section class="max-w-xl mx-auto m-6">
+  <section class="max-w-xl mx-auto m-6 pl-3 pr-3">
     <h1 class="mb-8">
       {{ category.name }}
     </h1>

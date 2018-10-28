@@ -64,7 +64,8 @@ export class ArticleRepository {
       tags: article.fields.tags,
       teaserImage: this._getTeaserImage(article, data),
       slug: article.fields.slug,
-      category: this._getCategory(article, data)
+      category: this._getCategory(article, data),
+      content: article.fields.content
     }
   }
 

@@ -1,6 +1,6 @@
 <template>
   <nav class="bg-grey-lighter text-black font-sans mb-8">
-    <div class="max-w-xl mx-auto pt-4 pb-4 justify-between items-center flex">
+    <div class="max-w-xl mx-auto pt-4 pb-4 justify-between items-center flex pl-3 pr-3">
       <nuxt-link
         to="/"
         class="no-underline text-black text-xl"
