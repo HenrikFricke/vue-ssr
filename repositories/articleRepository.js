@@ -11,6 +11,20 @@ export class ArticleRepository {
     this._getTeaserImage = this._getTeaserImage.bind(this)
   }
 
+  async findBySlug(slug) {
+    const { data } = await this._fetch(
+      `/spaces/${
+        this.spaceId
+      }/environments/master/entries?content_type=article&fields.slug=${slug}`
+    )
+
+    if (data.items.length === 0) {
+      throw new Error('Unknown article')
+    }
+
+    return this._normalize(data.items[0], data)
+  }
+
   async findAll() {
     const { data } = await this._fetch(
       `/spaces/${this.spaceId}/environments/master/entries?content_type=article`
@@ -47,7 +61,8 @@ export class ArticleRepository {
       teaser: article.fields.teaser,
       source: article.fields.source,
       tags: article.fields.tags,
-      teaserImage: this._getTeaserImage(article, data)
+      teaserImage: this._getTeaserImage(article, data),
+      slug: article.fields.slug
     }
   }
 
