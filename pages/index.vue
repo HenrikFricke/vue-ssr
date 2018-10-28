@@ -6,6 +6,8 @@
       :headline="article.headline"
       :teaser="article.teaser"
       :teaser-image="article.teaserImage"
+      :category-slug="article.category.slug"
+      :article-slug="article.slug"
     />
   </section>
 </template>

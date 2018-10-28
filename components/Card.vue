@@ -1,5 +1,8 @@
 <template>
-  <div class="w-full lg:flex mb-8">
+  <nuxt-link
+    :to="url"
+    class="w-full lg:flex mb-8 no-underline"
+  >
     <div
       :style="{ backgroundImage: teaserImageUrl }"
       class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
@@ -14,7 +17,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
@@ -31,11 +34,22 @@ export default {
     teaserImage: {
       type: String,
       required: true
+    },
+    categorySlug: {
+      type: String,
+      required: true
+    },
+    articleSlug: {
+      type: String,
+      required: true
     }
   },
   computed: {
     teaserImageUrl() {
       return `url(${this.$props.teaserImage})`
+    },
+    url() {
+      return `/${this.categorySlug}/${this.articleSlug}`
     }
   }
 }
